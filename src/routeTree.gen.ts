@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalysisRouteImport } from './routes/analysis'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as PlanRouteImport } from './routes/plan'
 
@@ -30,6 +32,16 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoalsRoute = GoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
@@ -45,6 +57,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/goals': typeof GoalsRoute
   '/onboarding': typeof OnboardingRoute
   '/plan': typeof PlanRoute
 }
@@ -52,6 +66,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/goals': typeof GoalsRoute
   '/onboarding': typeof OnboardingRoute
   '/plan': typeof PlanRoute
 }
@@ -60,21 +76,47 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/goals': typeof GoalsRoute
   '/onboarding': typeof OnboardingRoute
   '/plan': typeof PlanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/analysis' | '/auth' | '/onboarding' | '/plan'
+  fullPaths:
+    | '/'
+    | '/analysis'
+    | '/auth'
+    | '/dashboard'
+    | '/goals'
+    | '/onboarding'
+    | '/plan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analysis' | '/auth' | '/onboarding' | '/plan'
-  id: '__root__' | '/' | '/analysis' | '/auth' | '/onboarding' | '/plan'
+  to:
+    | '/'
+    | '/analysis'
+    | '/auth'
+    | '/dashboard'
+    | '/goals'
+    | '/onboarding'
+    | '/plan'
+  id:
+    | '__root__'
+    | '/'
+    | '/analysis'
+    | '/auth'
+    | '/dashboard'
+    | '/goals'
+    | '/onboarding'
+    | '/plan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalysisRoute: typeof AnalysisRoute
   AuthRoute: typeof AuthRoute
+  DashboardRoute: typeof DashboardRoute
+  GoalsRoute: typeof GoalsRoute
   OnboardingRoute: typeof OnboardingRoute
   PlanRoute: typeof PlanRoute
 }
@@ -102,6 +144,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/goals': {
+      id: '/goals'
+      path: '/goals'
+      fullPath: '/goals'
+      preLoaderRoute: typeof GoalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboarding': {
       id: '/onboarding'
       path: '/onboarding'
@@ -123,6 +179,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalysisRoute: AnalysisRoute,
   AuthRoute: AuthRoute,
+  DashboardRoute: DashboardRoute,
+  GoalsRoute: GoalsRoute,
   OnboardingRoute: OnboardingRoute,
   PlanRoute: PlanRoute,
 }
