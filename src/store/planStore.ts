@@ -180,6 +180,6 @@ export const usePlanStore = create<PlanState>()(
         set((s) => ({ onboardingComplete: true, profile: { ...s.profile, isSample: false } })),
       reset: () => set({ profile: { ...sampleProfile }, onboardingComplete: true }),
     }),
-    { name: "alloq-plan-v1" },
+    { name: "alloq-plan-v1", skipHydration: true },
   ),
 );
