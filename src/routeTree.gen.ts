@@ -12,10 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalysisRouteImport } from './routes/analysis'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CoachRouteImport } from './routes/coach'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as GoalsRouteImport } from './routes/goals'
+import { Route as InvestmentsRouteImport } from './routes/investments'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as PlanRouteImport } from './routes/plan'
+import { Route as PremiumRouteImport } from './routes/premium'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ScenariosRouteImport } from './routes/scenarios'
 import { Route as GoalGoalIdRouteImport } from './routes/goal.$goalId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -33,6 +38,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoachRoute = CoachRouteImport.update({
+  id: '/coach',
+  path: '/coach',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -41,6 +51,11 @@ const DashboardRoute = DashboardRouteImport.update({
 const GoalsRoute = GoalsRouteImport.update({
   id: '/goals',
   path: '/goals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvestmentsRoute = InvestmentsRouteImport.update({
+  id: '/investments',
+  path: '/investments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -53,6 +68,21 @@ const PlanRoute = PlanRouteImport.update({
   path: '/plan',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PremiumRoute = PremiumRouteImport.update({
+  id: '/premium',
+  path: '/premium',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScenariosRoute = ScenariosRouteImport.update({
+  id: '/scenarios',
+  path: '/scenarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GoalGoalIdRoute = GoalGoalIdRouteImport.update({
   id: '/goal/$goalId',
   path: '/goal/$goalId',
@@ -63,20 +93,30 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
+  '/coach': typeof CoachRoute
   '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
+  '/investments': typeof InvestmentsRoute
   '/onboarding': typeof OnboardingRoute
   '/plan': typeof PlanRoute
+  '/premium': typeof PremiumRoute
+  '/profile': typeof ProfileRoute
+  '/scenarios': typeof ScenariosRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
+  '/coach': typeof CoachRoute
   '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
+  '/investments': typeof InvestmentsRoute
   '/onboarding': typeof OnboardingRoute
   '/plan': typeof PlanRoute
+  '/premium': typeof PremiumRoute
+  '/profile': typeof ProfileRoute
+  '/scenarios': typeof ScenariosRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
 }
 export interface FileRoutesById {
@@ -84,10 +124,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
+  '/coach': typeof CoachRoute
   '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
+  '/investments': typeof InvestmentsRoute
   '/onboarding': typeof OnboardingRoute
   '/plan': typeof PlanRoute
+  '/premium': typeof PremiumRoute
+  '/profile': typeof ProfileRoute
+  '/scenarios': typeof ScenariosRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
 }
 export interface FileRouteTypes {
@@ -96,30 +141,45 @@ export interface FileRouteTypes {
     | '/'
     | '/analysis'
     | '/auth'
+    | '/coach'
     | '/dashboard'
     | '/goals'
+    | '/investments'
     | '/onboarding'
     | '/plan'
+    | '/premium'
+    | '/profile'
+    | '/scenarios'
     | '/goal/$goalId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/analysis'
     | '/auth'
+    | '/coach'
     | '/dashboard'
     | '/goals'
+    | '/investments'
     | '/onboarding'
     | '/plan'
+    | '/premium'
+    | '/profile'
+    | '/scenarios'
     | '/goal/$goalId'
   id:
     | '__root__'
     | '/'
     | '/analysis'
     | '/auth'
+    | '/coach'
     | '/dashboard'
     | '/goals'
+    | '/investments'
     | '/onboarding'
     | '/plan'
+    | '/premium'
+    | '/profile'
+    | '/scenarios'
     | '/goal/$goalId'
   fileRoutesById: FileRoutesById
 }
@@ -127,10 +187,15 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalysisRoute: typeof AnalysisRoute
   AuthRoute: typeof AuthRoute
+  CoachRoute: typeof CoachRoute
   DashboardRoute: typeof DashboardRoute
   GoalsRoute: typeof GoalsRoute
+  InvestmentsRoute: typeof InvestmentsRoute
   OnboardingRoute: typeof OnboardingRoute
   PlanRoute: typeof PlanRoute
+  PremiumRoute: typeof PremiumRoute
+  ProfileRoute: typeof ProfileRoute
+  ScenariosRoute: typeof ScenariosRoute
   GoalGoalIdRoute: typeof GoalGoalIdRoute
 }
 
@@ -157,6 +222,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/coach': {
+      id: '/coach'
+      path: '/coach'
+      fullPath: '/coach'
+      preLoaderRoute: typeof CoachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -169,6 +241,13 @@ declare module '@tanstack/react-router' {
       path: '/goals'
       fullPath: '/goals'
       preLoaderRoute: typeof GoalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/investments': {
+      id: '/investments'
+      path: '/investments'
+      fullPath: '/investments'
+      preLoaderRoute: typeof InvestmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -185,6 +264,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/premium': {
+      id: '/premium'
+      path: '/premium'
+      fullPath: '/premium'
+      preLoaderRoute: typeof PremiumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scenarios': {
+      id: '/scenarios'
+      path: '/scenarios'
+      fullPath: '/scenarios'
+      preLoaderRoute: typeof ScenariosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/goal/$goalId': {
       id: '/goal/$goalId'
       path: '/goal/$goalId'
@@ -199,10 +299,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalysisRoute: AnalysisRoute,
   AuthRoute: AuthRoute,
+  CoachRoute: CoachRoute,
   DashboardRoute: DashboardRoute,
   GoalsRoute: GoalsRoute,
+  InvestmentsRoute: InvestmentsRoute,
   OnboardingRoute: OnboardingRoute,
   PlanRoute: PlanRoute,
+  PremiumRoute: PremiumRoute,
+  ProfileRoute: ProfileRoute,
+  ScenariosRoute: ScenariosRoute,
   GoalGoalIdRoute: GoalGoalIdRoute,
 }
 export const routeTree = rootRouteImport
