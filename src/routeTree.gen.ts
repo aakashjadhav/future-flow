@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalysisRouteImport } from './routes/analysis'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CoachRouteImport } from './routes/coach'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as InvestmentsRouteImport } from './routes/investments'
@@ -33,6 +34,11 @@ const AnalysisRoute = AnalysisRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachRoute = CoachRouteImport.update({
+  id: '/coach',
+  path: '/coach',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
+  '/coach': typeof CoachRoute
   '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
   '/investments': typeof InvestmentsRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
+  '/coach': typeof CoachRoute
   '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
   '/investments': typeof InvestmentsRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
+  '/coach': typeof CoachRoute
   '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
   '/investments': typeof InvestmentsRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/analysis'
     | '/auth'
+    | '/coach'
     | '/dashboard'
     | '/goals'
     | '/investments'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/analysis'
     | '/auth'
+    | '/coach'
     | '/dashboard'
     | '/goals'
     | '/investments'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/'
     | '/analysis'
     | '/auth'
+    | '/coach'
     | '/dashboard'
     | '/goals'
     | '/investments'
@@ -151,6 +163,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalysisRoute: typeof AnalysisRoute
   AuthRoute: typeof AuthRoute
+  CoachRoute: typeof CoachRoute
   DashboardRoute: typeof DashboardRoute
   GoalsRoute: typeof GoalsRoute
   InvestmentsRoute: typeof InvestmentsRoute
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coach': {
+      id: '/coach'
+      path: '/coach'
+      fullPath: '/coach'
+      preLoaderRoute: typeof CoachRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -239,6 +259,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalysisRoute: AnalysisRoute,
   AuthRoute: AuthRoute,
+  CoachRoute: CoachRoute,
   DashboardRoute: DashboardRoute,
   GoalsRoute: GoalsRoute,
   InvestmentsRoute: InvestmentsRoute,
