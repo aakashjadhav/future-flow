@@ -4,10 +4,10 @@ import { formatCompactINR, formatINR } from "@/lib/format";
 
 interface Props {
   value: number;
-  format?: "inr" | "compact" | "plain" | "percent";
-  className?: string;
-  duration?: number;
-  suffix?: string;
+  format?: "inr" | "compact" | "plain" | "percent" | undefined;
+  className?: string | undefined;
+  duration?: number | undefined;
+  suffix?: string | undefined;
 }
 
 function render(value: number, format: Props["format"]): string {
