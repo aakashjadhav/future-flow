@@ -21,6 +21,7 @@ import { Route as PlanRouteImport } from './routes/plan'
 import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ScenariosRouteImport } from './routes/scenarios'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as GoalGoalIdRouteImport } from './routes/goal.$goalId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -83,6 +84,11 @@ const ScenariosRoute = ScenariosRouteImport.update({
   path: '/scenarios',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GoalGoalIdRoute = GoalGoalIdRouteImport.update({
   id: '/goal/$goalId',
   path: '/goal/$goalId',
@@ -102,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/premium': typeof PremiumRoute
   '/profile': typeof ProfileRoute
   '/scenarios': typeof ScenariosRoute
+  '/api/chat': typeof ApiChatRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
 }
 export interface FileRoutesByTo {
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/premium': typeof PremiumRoute
   '/profile': typeof ProfileRoute
   '/scenarios': typeof ScenariosRoute
+  '/api/chat': typeof ApiChatRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
 }
 export interface FileRoutesById {
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/premium': typeof PremiumRoute
   '/profile': typeof ProfileRoute
   '/scenarios': typeof ScenariosRoute
+  '/api/chat': typeof ApiChatRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
 }
 export interface FileRouteTypes {
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
     | '/premium'
     | '/profile'
     | '/scenarios'
+    | '/api/chat'
     | '/goal/$goalId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/premium'
     | '/profile'
     | '/scenarios'
+    | '/api/chat'
     | '/goal/$goalId'
   id:
     | '__root__'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/premium'
     | '/profile'
     | '/scenarios'
+    | '/api/chat'
     | '/goal/$goalId'
   fileRoutesById: FileRoutesById
 }
@@ -196,6 +208,7 @@ export interface RootRouteChildren {
   PremiumRoute: typeof PremiumRoute
   ProfileRoute: typeof ProfileRoute
   ScenariosRoute: typeof ScenariosRoute
+  ApiChatRoute: typeof ApiChatRoute
   GoalGoalIdRoute: typeof GoalGoalIdRoute
 }
 
@@ -285,6 +298,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScenariosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/goal/$goalId': {
       id: '/goal/$goalId'
       path: '/goal/$goalId'
@@ -308,6 +328,7 @@ const rootRouteChildren: RootRouteChildren = {
   PremiumRoute: PremiumRoute,
   ProfileRoute: ProfileRoute,
   ScenariosRoute: ScenariosRoute,
+  ApiChatRoute: ApiChatRoute,
   GoalGoalIdRoute: GoalGoalIdRoute,
 }
 export const routeTree = rootRouteImport
