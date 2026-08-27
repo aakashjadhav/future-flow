@@ -64,7 +64,7 @@ export interface AssetItem {
   name: string;
   type: AssetType;
   value: number;
-  goalId?: string;
+  goalId?: string | undefined;
 }
 
 export interface Goal {
