@@ -19,15 +19,16 @@ export class ApiError extends Error {
 
 export async function request<T>(
   path: string,
-  init?: RequestInit & { body?: unknown },
+  init?: Omit<RequestInit, "body"> & { body?: unknown },
 ): Promise<T> {
   if (!useRemoteApi) {
     throw new ApiError("No API base URL configured; using local mock adapter.");
   }
+  const { body, ...rest } = init ?? {};
   const res = await fetch(`${API_BASE_URL}${path}`, {
-    ...init,
+    ...rest,
     headers: { "content-type": "application/json", ...(init?.headers ?? {}) },
-    body: init?.body === undefined ? undefined : JSON.stringify(init.body),
+    ...(body === undefined ? {} : { body: JSON.stringify(body) }),
   });
   if (!res.ok) {
     throw new ApiError("We couldn't reach the planning service.", res.status);
