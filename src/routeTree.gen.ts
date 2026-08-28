@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalysisRouteImport } from './routes/analysis'
 import { Route as AuthRouteImport } from './routes/auth'
-import { Route as CoachRouteImport } from './routes/coach'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as InvestmentsRouteImport } from './routes/investments'
@@ -22,6 +21,8 @@ import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ScenariosRouteImport } from './routes/scenarios'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as CoachIndexRouteImport } from './routes/coach.index'
+import { Route as CoachThreadIdRouteImport } from './routes/coach.$threadId'
 import { Route as GoalGoalIdRouteImport } from './routes/goal.$goalId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -37,11 +38,6 @@ const AnalysisRoute = AnalysisRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CoachRoute = CoachRouteImport.update({
-  id: '/coach',
-  path: '/coach',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -89,6 +85,16 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoachIndexRoute = CoachIndexRouteImport.update({
+  id: '/coach/',
+  path: '/coach/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachThreadIdRoute = CoachThreadIdRouteImport.update({
+  id: '/coach/$threadId',
+  path: '/coach/$threadId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GoalGoalIdRoute = GoalGoalIdRouteImport.update({
   id: '/goal/$goalId',
   path: '/goal/$goalId',
@@ -99,7 +105,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
-  '/coach': typeof CoachRoute
   '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
   '/investments': typeof InvestmentsRoute
@@ -109,13 +114,14 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/scenarios': typeof ScenariosRoute
   '/api/chat': typeof ApiChatRoute
+  '/coach/$threadId': typeof CoachThreadIdRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
+  '/coach/': typeof CoachIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
-  '/coach': typeof CoachRoute
   '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
   '/investments': typeof InvestmentsRoute
@@ -125,14 +131,15 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/scenarios': typeof ScenariosRoute
   '/api/chat': typeof ApiChatRoute
+  '/coach/$threadId': typeof CoachThreadIdRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
+  '/coach': typeof CoachIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/analysis': typeof AnalysisRoute
   '/auth': typeof AuthRoute
-  '/coach': typeof CoachRoute
   '/dashboard': typeof DashboardRoute
   '/goals': typeof GoalsRoute
   '/investments': typeof InvestmentsRoute
@@ -142,7 +149,9 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/scenarios': typeof ScenariosRoute
   '/api/chat': typeof ApiChatRoute
+  '/coach/$threadId': typeof CoachThreadIdRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
+  '/coach/': typeof CoachIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -150,7 +159,6 @@ export interface FileRouteTypes {
     | '/'
     | '/analysis'
     | '/auth'
-    | '/coach'
     | '/dashboard'
     | '/goals'
     | '/investments'
@@ -160,13 +168,14 @@ export interface FileRouteTypes {
     | '/profile'
     | '/scenarios'
     | '/api/chat'
+    | '/coach/$threadId'
     | '/goal/$goalId'
+    | '/coach/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/analysis'
     | '/auth'
-    | '/coach'
     | '/dashboard'
     | '/goals'
     | '/investments'
@@ -176,13 +185,14 @@ export interface FileRouteTypes {
     | '/profile'
     | '/scenarios'
     | '/api/chat'
+    | '/coach/$threadId'
     | '/goal/$goalId'
+    | '/coach'
   id:
     | '__root__'
     | '/'
     | '/analysis'
     | '/auth'
-    | '/coach'
     | '/dashboard'
     | '/goals'
     | '/investments'
@@ -192,14 +202,15 @@ export interface FileRouteTypes {
     | '/profile'
     | '/scenarios'
     | '/api/chat'
+    | '/coach/$threadId'
     | '/goal/$goalId'
+    | '/coach/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalysisRoute: typeof AnalysisRoute
   AuthRoute: typeof AuthRoute
-  CoachRoute: typeof CoachRoute
   DashboardRoute: typeof DashboardRoute
   GoalsRoute: typeof GoalsRoute
   InvestmentsRoute: typeof InvestmentsRoute
@@ -209,7 +220,9 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   ScenariosRoute: typeof ScenariosRoute
   ApiChatRoute: typeof ApiChatRoute
+  CoachThreadIdRoute: typeof CoachThreadIdRoute
   GoalGoalIdRoute: typeof GoalGoalIdRoute
+  CoachIndexRoute: typeof CoachIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -233,13 +246,6 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/coach': {
-      id: '/coach'
-      path: '/coach'
-      fullPath: '/coach'
-      preLoaderRoute: typeof CoachRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -305,6 +311,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/coach/': {
+      id: '/coach/'
+      path: '/coach'
+      fullPath: '/coach/'
+      preLoaderRoute: typeof CoachIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coach/$threadId': {
+      id: '/coach/$threadId'
+      path: '/coach/$threadId'
+      fullPath: '/coach/$threadId'
+      preLoaderRoute: typeof CoachThreadIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/goal/$goalId': {
       id: '/goal/$goalId'
       path: '/goal/$goalId'
@@ -319,7 +339,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalysisRoute: AnalysisRoute,
   AuthRoute: AuthRoute,
-  CoachRoute: CoachRoute,
   DashboardRoute: DashboardRoute,
   GoalsRoute: GoalsRoute,
   InvestmentsRoute: InvestmentsRoute,
@@ -329,7 +348,9 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   ScenariosRoute: ScenariosRoute,
   ApiChatRoute: ApiChatRoute,
+  CoachThreadIdRoute: CoachThreadIdRoute,
   GoalGoalIdRoute: GoalGoalIdRoute,
+  CoachIndexRoute: CoachIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
