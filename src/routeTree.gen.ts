@@ -22,6 +22,7 @@ import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ScenariosRouteImport } from './routes/scenarios'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as CoachIndexRouteImport } from './routes/coach.index'
+import { Route as CoachThreadIdRouteImport } from './routes/coach.$threadId'
 import { Route as GoalGoalIdRouteImport } from './routes/goal.$goalId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -89,6 +90,11 @@ const CoachIndexRoute = CoachIndexRouteImport.update({
   path: '/coach/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoachThreadIdRoute = CoachThreadIdRouteImport.update({
+  id: '/coach/$threadId',
+  path: '/coach/$threadId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GoalGoalIdRoute = GoalGoalIdRouteImport.update({
   id: '/goal/$goalId',
   path: '/goal/$goalId',
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/scenarios': typeof ScenariosRoute
   '/api/chat': typeof ApiChatRoute
+  '/coach/$threadId': typeof CoachThreadIdRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
   '/coach/': typeof CoachIndexRoute
 }
@@ -124,6 +131,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/scenarios': typeof ScenariosRoute
   '/api/chat': typeof ApiChatRoute
+  '/coach/$threadId': typeof CoachThreadIdRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
   '/coach': typeof CoachIndexRoute
 }
@@ -141,6 +149,7 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/scenarios': typeof ScenariosRoute
   '/api/chat': typeof ApiChatRoute
+  '/coach/$threadId': typeof CoachThreadIdRoute
   '/goal/$goalId': typeof GoalGoalIdRoute
   '/coach/': typeof CoachIndexRoute
 }
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/scenarios'
     | '/api/chat'
+    | '/coach/$threadId'
     | '/goal/$goalId'
     | '/coach/'
   fileRoutesByTo: FileRoutesByTo
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/scenarios'
     | '/api/chat'
+    | '/coach/$threadId'
     | '/goal/$goalId'
     | '/coach'
   id:
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/scenarios'
     | '/api/chat'
+    | '/coach/$threadId'
     | '/goal/$goalId'
     | '/coach/'
   fileRoutesById: FileRoutesById
@@ -208,6 +220,7 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   ScenariosRoute: typeof ScenariosRoute
   ApiChatRoute: typeof ApiChatRoute
+  CoachThreadIdRoute: typeof CoachThreadIdRoute
   GoalGoalIdRoute: typeof GoalGoalIdRoute
   CoachIndexRoute: typeof CoachIndexRoute
 }
@@ -305,6 +318,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoachIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/coach/$threadId': {
+      id: '/coach/$threadId'
+      path: '/coach/$threadId'
+      fullPath: '/coach/$threadId'
+      preLoaderRoute: typeof CoachThreadIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/goal/$goalId': {
       id: '/goal/$goalId'
       path: '/goal/$goalId'
@@ -328,6 +348,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   ScenariosRoute: ScenariosRoute,
   ApiChatRoute: ApiChatRoute,
+  CoachThreadIdRoute: CoachThreadIdRoute,
   GoalGoalIdRoute: GoalGoalIdRoute,
   CoachIndexRoute: CoachIndexRoute,
 }
